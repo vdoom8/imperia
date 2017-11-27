@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html>
+<title>Імперія</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="img/favicon.png" type="image/png">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+    background-image: url('/img/a.jpg');
+    min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+    background-image: url("/img/fitness.jpg");
+    min-height: 500px;
+}
+
+/* Third image (Spa) */
+.bgimg-3 {
+    background-image: url("/img/spa.jpg");
+    min-height: 500px;
+}
+
+/* Fourth image (Contact) */
+.bgimg-4 {
+    background-image: url("/img/pool.jpg");
+    min-height: 500px;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="#home" class="w3-bar-item w3-button">Головна</a>
+    <a href="#gym" class="w3-bar-item w3-button w3-hide-small"><img class="icon icons8-Гантель" width="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAzElEQVRoQ+2Y2w6AMAhD8f8/WqOJD14QsFmW6fF1WEbbMWWywZ9p8P0bBfRWEAVQQGTgVxaaHbJUEiTcSnIp0YNTJNy7As6Ae4yUSCjA288GSQEOCZXeEimLApyBwE9Y6EwQbbTSgswMC3kM7ERGXahIeDo8lXcNooA0p7VAFOAM1BxzicZCw1iITwnR63xKYCEsdM+Adw8cJimMVRir8EeWbyHRhZNHOkZKuJ+cTr9lsst7FQW6bDBKSgERQ63XUaA1wxE+CkQMtV5fAK/ScClYPG8LAAAAAElFTkSuQmCC"> Тренажерний зал</a>
+    <a href="#spa" class="w3-bar-item w3-button w3-hide-small"><img class="icon icons8-Сауна-Filled" width="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADyUlEQVRoQ+2Zi5FNQRCG/40AESACRIAIEAEiQASIABEgAkSACBABIiAD6qs6vdXbus+dxzm1amun6tZu9Z3H//d75h7pjIyjM8JD50QaLHlX0iNJt5a5nyQ9l8TfzcdeFnkt6UGBFjLPtmayBxEs8e4A0NtbW2YPIrjOzQNEPkiC8GZjDyJ/GtFtevammy0E/gsiBCGZ5oakH06zlTxT/pau1YwnWuTlQuSVpMcOZSXPiGwZ7M14IhED8dnlf8BW8ioc3ki6v0H6bcaTxYj5ePyukldkAIFVLYOhHFyltyA24amI/JR0JSBkw0zemKSGp1XnnpBv6VrXJb0ILlmh/71Yhlhcs9Cwa5lvP5FEoNmo5PZ9S4BXpB5KYv9sNOPxFsGVvi+7XZKE1hiV3B/MuuiKrb7EOVfdebauC48nYqnubWj4KrkdSHNIkzgzogewVxceT+SLJPw8NnSV3IC/l3RnhoWkr0sR9tt04fFEmtJcAviXpIuTRFiOe/luoguPJ4KvXpDk44MDKjnfzQR55B7dqwuPJ2IuEi8+ldz7sQdFn8bANbIBYPbEnVCcjdjad+HxRLiSflwsQJxwEKOS813MVt+WOPMZJ5K5txDJ2hjvDV14YkG0zWPwZXISQ9S6NZtrmcyyYuaWRtLIN+OJRAhaq7QAtZHJ6aOo5H4YkOw7m0dAE9iMeHeJqb8Zz8zFytKjJ0J8mEsiR+u4CB8IoCQ+NifeXTzJIsRy8QyR7CYIQNyBTtcTiqejabpi5sbUPYRpaNGCCqDXVtTmLQAxqxFrKXu4u54hQgzRRhx6MfGBS4NYZTRIQHLNkqXeZoj4TS0OIMf/vj74eXae3SUsZvjrq3pXfDB5lAgPcBQs7zL+cAgZKYhdXp5L7YURq0TgxAoPH1imauubLJJloRbN2CXJshHkWoYFvLdmyzo/57jeeYscCt6eQyAFIWLI7jWsx0o8SgDe16mevf1c6ySGXQsXeZqcjlvgcrhGFbQQoPIT2LhcHPEFp4nkaIxYHxQP6d0vq0Wxup8KkVjZ10BkvRrzh3526NWgB5Zps+fngsqqsXHc1SJsnhHpAVFV+B6rHpOcsUj2WN3jFlXCGMI0tGhRwx5ETqXXyjTa80tU9voylHpnWhTWZkR6gMxa9EQSmHGtLOtk71NV1slaorXn09XstTWRHivPpu/NLFKl4FblZETim1pTDenRXrVh9POeYI9rjxvAZvRuYqv2qr25V9AgckuEBM2g73bXMNHGs5Z3Y5IEBbJ17T/7zhIZUd4ua86J7KLWiU3/AlhoIEI0cksJAAAAAElFTkSuQmCC"> Сауна</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">Обладнання</a>
+    <a href="#portfolio" class="w3-bar-item w3-button" onclick="toggleFunction()">Сауна</a>
+    <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">CONTACT</a>
+  </div>
+</div>
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">ІМПЕРІЯ</span>
+  </div>
+</div>
+
+<!-- Container (About Section) -->
+<div class="w3-content w3-container w3-padding-64" id="gym">
+  <h3 class="w3-center">Тренажерний Зал</h3>
+  <p class="w3-center"><em>Я люблю займатись спортом</em></p>
+  <p>Наша мета - це Ваші результати і Ваше задоволення. Саме тому, тренери нашого залу використовують провідні методики роботи, основані на багаторічній практиці в сфері бодібілдингу, бодіфітнесу, кросфіту і оздоровчої фізкультури.  
+  Невід'ємною частиною Ваших тренувань є відпочинок та харчування, що не залишається поза увагою наших інструкторів. Кожен наш відвідувач отримує консультації із режиму харчування та продуктів, які рекомендовано або не рекомендовано вживати. Крім цього, наші тренери розробляють індивідуальні дієти здорового харчування - як для схуднення так і для набору м'язевої маси.
+   В спортклубі можна замовити багато видів коктейлів із корисних спортивних добавок (протеїну, гейнеру, BCAA, креатину, передтренувальних комплексів, жироспалювачів та вітамінів), для швидкого відновлення, схуднення, збереження і росту м'язів.
+  Ми робимо все, щоб займатися у нас було максимально комфортно і ефективно!</p>
+</div>
+
+<!-- Second Parallax Image with Portfolio Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+    <span class="w3-xxlarge w3-text-white w3-wide">Фітнес-зал</span>
+  </div>
+</div>
+
+<!-- Container (Portfolio Section) -->
+<div class="w3-content w3-container w3-padding-64" id="portfolio">
+  <h3 class="w3-center">Хочете відчувати себе краще, мати більше сил, і , можливо, навіть жити довше? Займіться фітнесом.</h3>
+  <p class="w3-center">Переваги регулярних тренувань для здоров’я важко переоцінити. Фітнес піде вам на користь, незалежно від вашого віку, статі або фізичних здібностей. 
+   Фітнес може сприяти запобіганню широкого спектру захворювань, включаючи інсульт, метаболічний синдром, діабет другого типу, депресію, деякі види раку, артрит. 
+   Заняття фітнесом, чи звичайна прогулянка швидким кроком протягом півгодини — прекрасний спосіб підбадьоритися. Фізична активність стимулює вироблення різних хімічних речовин у мозку, завдяки яким ви відчуваєте себе щасливіше і спокійніше.
+   Крім того, фітнес підвищує самооцінку і додає впевненості в собі, а це — ключовий фактор для гарного настрою.</p>
+</div>
+
+<!-- Third Parallax Image with Portfolio Text -->
+<div class="bgimg-3 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+     <span class="w3-xxlarge w3-text-white w3-wide">СПА зона</span>
+  </div>
+</div>
+
+<!-- Container (SPA Section) -->
+<div class="w3-content w3-container w3-padding-64" id="spa">
+  <h3 class="w3-center">Присвятіть час собі, своєму тілу та відновленню. Забудьте про турботи, подбайте про себе у спокої та гармонії.</h3>
+  <p class="w3-center">Ми пропонуємо Вам відвідати нашу сауну з басейном. У парильні шкіра відкриває пори, позбавляється від шлаків, холестерину і токсинів. Особливо корисно в ній бувати після занять спортом і фізичних навантажень, так як під впливом високих температур мязи швидко розслабляються і стають еластичними.
+Крім того, регулярне проведення таких процедур сприяє лікуванню простудних захворювань, особливо якщо зволожити повітря відварами і настоями лаванди, мяти та евкаліпта. Після відвідин сауни Ви зможете розслабитися в кімнаті відпочинку.</p>
+</div>
+
+<!-- Fourth Parallax Image with Portfolio Text -->
+<div class="bgimg-4 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+     <span class="w3-xxlarge w3-text-white w3-wide">Контакти</span>
+  </div>
+</div>
+
+
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64" id="contact">
+  <h3 class="w3-center">Як нас знайти</h3>
+  <p class="w3-center"><em>Зв'яжіться з нами!</em></p>
+
+  <div class="w3-row w3-padding-32 w3-section">
+    <div class="w3-col m4 w3-container">
+      <!-- Add Google Maps -->
+      <div id="map" class="w3-round-large w3-greyscale" style="width:100%;height:400px;"></div>
+    </div>
+    <div class="w3-col m8 w3-panel">
+      <div class="w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Миколаїв, вул. Космонавтів 4<br>
+        <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Телефон: +38 0971847432<br>
+        <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: imperia-sports@mail.com<br>
+      </div>
+      <p>Подзвоніть нам <i class="fa fa-phone-square"></i> , або напишіть нам <i class="fa fa-envelope"></i> :</p>
+      <form action="/action_page.php" target="_blank">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Ваше Ім'я" required name="Name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Повідомлення" required name="Message">
+        <button class="w3-button w3-black w3-right w3-section" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <a href="https://www.facebook.com/profile.php?id=100009029147875"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.instagram.com/imperiasportclub/?hl=uk"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+  </div>
+<a href="index.html">2017 Спортивний компелекс "Імперія"</a>
+</footer>
+ 
+<!-- Add Google Maps -->
+<script>
+    function initMap(){
+      // Map options
+      var options = {
+        zoom:15,
+        center:{lat:49.525058,lng:23.978937}
+      }
+
+      // New map
+      var map = new google.maps.Map(document.getElementById('map'), options);
+
+      
+      /*
+      // Add marker
+      var marker = new google.maps.Marker({
+        position:{lat:42.4668,lng:-70.9495},
+        map:map,
+        icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content:'<h1>Lynn MA</h1>'
+      });
+
+      marker.addListener('click', function(){
+        infoWindow.open(map, marker);
+      });
+      */
+
+      // Array of markers
+      var markers = [
+        {
+          coords:{lat:49.524919,lng:23.982808},
+          content:'<h1>Імперія</h1>'
+        }
+      ];
+
+      // Loop through markers
+      for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+      }
+
+      // Add Marker Function
+      function addMarker(props){
+        var marker = new google.maps.Marker({
+          position:props.coords,
+          map:map,
+          //icon:props.iconImage
+        });
+
+        // Check for customicon
+        if(props.iconImage){
+          // Set icon image
+          marker.setIcon(props.iconImage);
+        }
+
+        // Check content
+        if(props.content){
+          var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
+        }
+      }
+    }
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJk8vyBjGVCzLTCBgqVLAZ-StReSEOltw&callback=initMap"></script>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+
+</body>
+</html>
